@@ -1,0 +1,14 @@
+# Render blueprint for the realtime game server (the Vercel site talks to this).
+services:
+  - type: web
+    name: holdem-server
+    runtime: docker
+    plan: starter            # free instances sleep after inactivity, which drops live tables
+    healthCheckPath: /healthz
+    envVars:
+      - key: CLIENT_ORIGIN   # your Vercel URL, e.g. https://holdem-night.vercel.app
+        sync: false
+      - key: SUPABASE_URL
+        sync: false
+      - key: SUPABASE_SERVICE_ROLE_KEY
+        sync: false
